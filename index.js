@@ -1,13 +1,18 @@
+/**
+ * This is alpha and probably NOT stable. Use at your own risk.
+ *
+ * It's also heavily inspired/stolen from mocha-cloud (https://github.com/visionmedia/mocha-cloud) and
+ * uses a similar API to connect safely to mocha-cloud-grid-view.
+ *
+ * Copyright 2013 Paul Bakaus, licensed under MIT
+ * "mocha-cloud" is Copyright 2013 TJ Holowaychuk
+ */
+
 var wd = require('wd'),
 	Emitter = require('events').EventEmitter,
 	debug = require('debug')('mocha-sauce'),
 	Batch = require('batch'),
-	request = require('request'),
-	extend = require('node.extend'),
-	clc = require('cli-color');
-
-
-
+	request = require('request');
 
 function Cloud(conf) {
 
@@ -25,10 +30,6 @@ function Cloud(conf) {
 	this.build = conf.build || '';
 
 }
-
-/**
- * Inherits from `Emitter.prototype`.
- */
 
 Cloud.prototype.__proto__ = Emitter.prototype;
 
@@ -134,6 +135,5 @@ Cloud.prototype.start = function(fn) {
 	batch.end(fn);
 
 };
-
 
 module.exports = Cloud;

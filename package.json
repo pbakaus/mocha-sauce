@@ -1,7 +1,7 @@
 {
 	"name": "mocha-sauce",
 	"version": "0.0.1",
-	"description": "Mocha tests in the cloud with Saucelabs, better",
+	"description": "Really fancy Mocha tests in the cloud with Saucelabs",
 	"keywords": ["mocha", "test", "tdd", "bdd", "saucelabs", "selenium", "cloud", "testing"],
 	"author": "Paul Bakaus <paul@paulbakaus.com>",
 	"dependencies": {
