@@ -20,6 +20,7 @@ function Cloud(conf) {
 	this.browsers = [];
 
 	this._url = conf.url || '';
+	this._concurrency = 2;
 	this.tags = conf.tags || [];
 	this.build = conf.build || '';
 
@@ -46,6 +47,11 @@ Cloud.prototype.url = function(url) {
 	return this;
 };
 
+Cloud.prototype.concurrency = function(num) {
+	this._concurrency = num;
+	return this;
+};
+
 Cloud.prototype.browser = function(conf) {
 	debug('add %s %s %s', conf.browserName, conf.version, conf.platform);
 	conf.version = conf.version || '';
@@ -57,6 +63,8 @@ Cloud.prototype.start = function(fn) {
 	var self = this;
 	var batch = new Batch();
 	fn = fn || function() {};
+
+	batch.concurrency(this._concurrency);
 
 	this.browsers.forEach(function(conf) {
 		conf.tags = self.tags;
