@@ -66,9 +66,14 @@ function FancyJSON(runner) {
 }
 
 
-function mochaSaucePlease() {
+function mochaSaucePlease(fn) {
 
 	(function(runner) {
+
+		// execute optional callback to give user access to the runner
+		if(fn) {
+			fn(runner);
+		}
 
 		// in a PhantomJS environment, things are different
 		if(!runner.on) {
