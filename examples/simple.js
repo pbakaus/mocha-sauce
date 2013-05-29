@@ -1,10 +1,10 @@
-var Cloud = require("../index.js");
+var MochaSauce = require("../index.js");
 
 // configure cloud
-var cloud = new Cloud({
+var sauce = new MochaSauce({
 	name: "WTF",
-	username: "pbakaus",
-	accessKey: "e7b171df-435b-41a4-8ab3-9abacf2f70e6",
+	username: "username",
+	accessKey: "00000000-0000-0000-0000-000000000000",
 	host: "localhost",
 	port: 4445,
 
@@ -14,20 +14,20 @@ var cloud = new Cloud({
 
 
 // setup what browsers to test with
-cloud.browser({ browserName: "chrome", platform: "Windows 7" });
-cloud.browser({ browserName: "firefox", platform: "Windows XP" });
+sauce.browser({ browserName: "chrome", platform: "Windows 7" });
+sauce.browser({ browserName: "firefox", platform: "Windows XP" });
 
 
-cloud.on('init', function(browser) {
+sauce.on('init', function(browser) {
   console.log('  init : %s %s', browser.browserName, browser.platform);
 });
 
-cloud.on('start', function(browser) {
+sauce.on('start', function(browser) {
   console.log('  start : %s %s', browser.browserName, browser.platform);
 });
 
-cloud.on('end', function(browser, res) {
+sauce.on('end', function(browser, res) {
   console.log('  end : %s %s : %d failures', browser.browserName, browser.platform, res.failures);
 });
 
-cloud.start();
+sauce.start();

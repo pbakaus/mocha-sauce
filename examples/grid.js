@@ -1,14 +1,14 @@
 var Canvas = require('term-canvas'),
 	size = process.stdout.getWindowSize(),
-	Cloud = require('../index.js'),
+	MochaSauce = require('../index.js'),
 	GridView = require('mocha-cloud-grid-view');
 
 
 // configure cloud
-var cloud = new Cloud({
+var sauce = new MochaSauce({
 	name: "WTF",
-	username: "pbakaus",
-	accessKey: "e7b171df-435b-41a4-8ab3-9abacf2f70e6",
+	username: "username",
+	accessKey: "00000000-0000-0000-0000-000000000000",
 	host: "localhost",
 	port: 4445,
 
@@ -21,8 +21,8 @@ var cloud = new Cloud({
 
 
 // setup what browsers to test with
-cloud.browser({ browserName: "chrome", platform: "Windows 7" });
-cloud.browser({ browserName: "firefox", platform: "Windows XP" });
+sauce.browser({ browserName: "chrome", platform: "Windows 7" });
+sauce.browser({ browserName: "firefox", platform: "Windows XP" });
 
 // clear terminal
 console.log("\033[2J\033[0f");
@@ -30,7 +30,7 @@ console.log("\033[2J\033[0f");
 // setup grid and canvas
 var canvas = new Canvas(size[0], size[1]);
 var ctx = canvas.getContext('2d');
-var grid = new GridView(cloud, ctx);
+var grid = new GridView(sauce, ctx);
 grid.size(canvas.width, canvas.height);
 ctx.hideCursor();
 
@@ -45,7 +45,7 @@ process.on('SIGINT', function(){
 // output failure messages
 // once complete, and exit > 0
 // accordingly
-cloud.start(function() {
+sauce.start(function() {
 	grid.showFailures();
 	setTimeout(function() {
 		ctx.showCursor();

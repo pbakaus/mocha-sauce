@@ -1,7 +1,7 @@
 /**
  * This is alpha and probably NOT stable. Use at your own risk.
  *
- * It's also heavily inspired/stolen from mocha-cloud (https://github.com/visionmedia/mocha-cloud) and
+ * It's also heavily inspired by/stolen from mocha-cloud (https://github.com/visionmedia/mocha-cloud) and
  * uses a similar API to connect safely to mocha-cloud-grid-view.
  *
  * Copyright 2013 Paul Bakaus, licensed under MIT
@@ -14,7 +14,7 @@ var wd = require('wd'),
 	Batch = require('batch'),
 	request = require('request');
 
-function Cloud(conf) {
+function MochaSauce(conf) {
 
 	this.name = conf.name;
 	this.user = conf.username || process.env.SAUCE_USER_NAME;
@@ -28,38 +28,52 @@ function Cloud(conf) {
 	this._concurrency = 2;
 	this.tags = conf.tags || [];
 	this.build = conf.build || '';
+	this._video = false;
+	this._screenshots = false;
 
 }
 
-Cloud.prototype.__proto__ = Emitter.prototype;
+MochaSauce.prototype.__proto__ = Emitter.prototype;
 
-Cloud.prototype.build = function(build) {
-	this._build = build;
+MochaSauce.prototype.build = function(build) {
+	this.build = build;
 	return this;
 };
 
-Cloud.prototype.tags = function(tags) {
-	this._tags = tags;
+MochaSauce.prototype.tags = function(tags) {
+	this.tags = tags;
 	return this;
 };
 
-Cloud.prototype.url = function(url) {
+MochaSauce.prototype.url = function(url) {
 	this._url = url;
 	return this;
 };
 
-Cloud.prototype.concurrency = function(num) {
+MochaSauce.prototype.concurrency = function(num) {
 	this._concurrency = num;
 	return this;
 };
 
-Cloud.prototype.browser = function(conf) {
+MochaSauce.prototype.record = function(video, screenshots) {
+
+	if(screenshots === undefined) {
+		screenshots = video;
+	}
+
+	this._video = video;
+	this._screenshots = screenshots;
+
+	return this;
+};
+
+MochaSauce.prototype.browser = function(conf) {
 	debug('add %s %s %s', conf.browserName, conf.version, conf.platform);
 	conf.version = conf.version || '';
 	this.browsers.push(conf);
 };
 
-Cloud.prototype.start = function(fn) {
+MochaSauce.prototype.start = function(fn) {
 
 	var self = this;
 	var batch = new Batch();
@@ -73,8 +87,8 @@ Cloud.prototype.start = function(fn) {
 		conf.build = self.build;
 
 		// disable Sauce features not needed for unit tests (video + screenshot recording)
-		conf['record-video'] = false;
-		conf['record-screenshots'] = false;
+		conf['record-video'] = self._video;
+		conf['record-screenshots'] = self._screenshots;
 
 		batch.push(function(done) {
 
@@ -136,4 +150,4 @@ Cloud.prototype.start = function(fn) {
 
 };
 
-module.exports = Cloud;
+module.exports = MochaSauce;
