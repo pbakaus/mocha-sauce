@@ -13,7 +13,7 @@ var sauce = new MochaSauce({
 	port: 4445,
 
 	// the test url
-	url: "http://localhost.zynga.com/wtf/test/unit/index.php?reporter=json",
+	url: "http://localhost/test",
 
 	// the current build name (optional)
 	build: Date.now()

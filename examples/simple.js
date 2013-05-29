@@ -9,7 +9,7 @@ var sauce = new MochaSauce({
 	port: 4445,
 
 	// the test url
-	url: "http://localhost.zynga.com/wtf/test/unit/"
+	url: "http://localhost/test"
 });
 
 
