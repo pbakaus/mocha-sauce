@@ -2,7 +2,7 @@ var MochaSauce = require("../index.js");
 
 // configure cloud
 var sauce = new MochaSauce({
-	name: "WTF",
+	name: "project",
 	username: "username",
 	accessKey: "00000000-0000-0000-0000-000000000000",
 	host: "localhost",
