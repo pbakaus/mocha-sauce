@@ -27,7 +27,7 @@ When setting up your test page, include the client.js file:
 
 Then when you loaded all your files, call the following function to execute the tests:
 
-    runTestHarness();
+    mochaSaucePlease();
 
 That should do the job!
 

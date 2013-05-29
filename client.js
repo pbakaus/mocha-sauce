@@ -66,7 +66,7 @@ function FancyJSON(runner) {
 }
 
 
-function runTestHarness() {
+function mochaSaucePlease() {
 
 	(function(runner) {
 
