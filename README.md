@@ -4,7 +4,7 @@
 
 ## Overview
 
-**Mocha Sauce is a node.js module that runs Mocha unit tests in the cloud using Sauce Connect or OnDemand**. Mocha Sauce is heavily inspired by [mocha-cloud](https://github.com/visionmedia/mocha-cloud) and uses a similar external API to be able to seemlessly connect to [mocha-cloud-grid-view](https://github.com/visionmedia/mocha-cloud-grid-view).
+**Mocha Sauce is a node.js module that runs Mocha unit tests in the cloud using Sauce Connect or OnDemand**. Mocha Sauce is heavily inspired by [mocha-cloud](https://github.com/visionmedia/mocha-cloud) and uses a similar external API to be able to seemlessly connect to the pre-bundled and bugfixed version of [mocha-cloud-grid-view](https://github.com/visionmedia/mocha-cloud-grid-view).
 
 ### Warning!
 
@@ -112,7 +112,7 @@ sauce.on('end', function(browser, res) {
 sauce.start();
 ```
 
-The above is a very basic example. For a more advanced example that uses a super nice grid view (mocha-cloud-grid-view), check out `examples/grid.js`.
+The above is a very basic example. For a more advanced example that uses a super nice grid view, check out `examples/grid.js`.
 
 Save this file somewhere, call it however you want. I'll choose `runner.js`.
 
