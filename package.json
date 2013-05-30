@@ -3,15 +3,14 @@
 	"version": "0.0.3",
 	"description": "Really fancy Mocha tests in the cloud with Saucelabs",
 	"keywords": ["mocha", "test", "tdd", "bdd", "saucelabs", "selenium", "cloud", "testing"],
-	"author": "Paul Bakaus <paul@paulbakaus.com>",
+	"author": "Paul Bakaus <pbakaus@zynga.com>",
 	"dependencies": {
 		"mocha": "1.9.0",
-		"mocha-cloud-grid-view": "*",
+		"max-component": "*",
+		"sum-component": "*",
 		"term-canvas": "*",
 		"wd": "*",
 		"request": "*",
-		"node.extend": "*",
-		"cli-color": "*",
 		"debug": "*",
 		"batch": "*"
 	},

@@ -2,14 +2,14 @@ var MochaSauce = require("../index.js");
 
 // configure cloud
 var sauce = new MochaSauce({
-	name: "project",
-	username: "username",
+	name: "Tasty chocolate",
+	username: "pbakaus",
 	accessKey: "00000000-0000-0000-0000-000000000000",
 	host: "localhost",
 	port: 4445,
 
 	// the test url
-	url: "http://localhost/test"
+	url: "http://localhost/oss/mocha-sauce/examples/test.html"
 });
 
 

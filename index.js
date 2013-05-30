@@ -151,3 +151,4 @@ MochaSauce.prototype.start = function(fn) {
 };
 
 module.exports = MochaSauce;
+module.exports.GridView = require('./grid');
