@@ -115,6 +115,7 @@ function mochaSaucePlease(fn) {
 			runner.stats.xUnitReport = xUnitReport;
 			runner.stats.jsonReport = jsonReport;
 			window.mochaResults = runner.stats;
+			window.chocoReady = true;
 		});
 
 	})(window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run());

@@ -102,18 +102,22 @@ MochaSauce.prototype.start = function(fn) {
 				debug('open %s', self._url);
 				self.emit('start', conf);
 
+				// load the test site
 				browser.get(self._url, function(err) {
 					if (err) return done(err);
 
-					function wait() {
-						browser.eval('window.mochaResults', function(err, res){
+					// wait until choco is ready
+					browser.waitForConditionInBrowser('window.chocoReady', 1000000, 1000, function(err) {
+						if (err) return done(err);
+
+						browser.eval('JSON.stringify(window.mochaResults)', function(err, res) {
 							if (err) return done(err);
 
-							if (!res) {
-								debug('waiting for results');
-								setTimeout(wait, 1000);
-								return;
-							}
+							// convert stringified object back to parsed
+							res = JSON.parse(res);
+
+							// add browser conf to be able to identify in the end callback
+							res.browser = conf;
 
 							debug('results %j', res);
 
@@ -137,9 +141,8 @@ MochaSauce.prototype.start = function(fn) {
 							});
 
 						});
-					}
 
-					wait();
+					});
 
 				});
 			});
