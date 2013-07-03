@@ -87,7 +87,12 @@ function mochaSaucePlease(fn) {
 		// Generate XUnit coverage
 		window.xUnitReport = '';
 		(function() {
-			var log = console && console.log;
+			var log = window.console && console.log;
+
+			if(!window.console) {
+				window.console = {};
+			}
+
 			console.log = function() {
 				window.xUnitReport += arguments[0] + "\n"; // TODO: handle complex console.log
 				if(log) log.apply(console, arguments);

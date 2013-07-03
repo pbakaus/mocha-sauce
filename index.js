@@ -107,42 +107,55 @@ MochaSauce.prototype.start = function(fn) {
 					if (err) return done(err);
 
 					// wait until choco is ready
-					browser.waitForConditionInBrowser('window.chocoReady', 1000000, 1000, function(err) {
-						if (err) return done(err);
+					function doItAgain() {
 
-						browser.eval('JSON.stringify(window.mochaResults)', function(err, res) {
+						browser.eval('window.chocoReady', function(err, res) {
+
+							if(res !== true) {
+								setTimeout(function() {
+									doItAgain();
+								}, 1000);
+								return;
+							}
+
 							if (err) return done(err);
 
-							// convert stringified object back to parsed
-							res = JSON.parse(res);
+							browser.eval('JSON.stringify(window.mochaResults)', function(err, res) {
+								if (err) return done(err);
 
-							// add browser conf to be able to identify in the end callback
-							res.browser = conf;
+								// convert stringified object back to parsed
+								res = JSON.parse(res);
 
-							debug('results %j', res);
+								// add browser conf to be able to identify in the end callback
+								res.browser = conf;
 
-							// update Sauce Labs with custom test data
-							var data = {
-								'custom-data': { mocha: res.jsonReport },
-								'passed': !res.failures
-							};
+								debug('results %j', res);
 
-							request({
-								method: "PUT",
-								uri: ["https://", self.user, ":", self.key, "@saucelabs.com/rest", "/v1/", self.user, "/jobs/", browser.sessionID].join(''),
-								headers: {'Content-Type': 'application/json'},
-								body: JSON.stringify(data)
-							}, function (/*error, response, body*/) {
+								// update Sauce Labs with custom test data
+								var data = {
+									'custom-data': { mocha: res.jsonReport },
+									'passed': !res.failures
+								};
 
-								self.emit('end', conf, res);
-								browser.quit();
-								done(null, res);
+								request({
+									method: "PUT",
+									uri: ["https://", self.user, ":", self.key, "@saucelabs.com/rest", "/v1/", self.user, "/jobs/", browser.sessionID].join(''),
+									headers: {'Content-Type': 'application/json'},
+									body: JSON.stringify(data)
+								}, function (/*error, response, body*/) {
+
+									self.emit('end', conf, res);
+									browser.quit();
+									done(null, res);
+
+								});
 
 							});
 
 						});
+					}
 
-					});
+					doItAgain();
 
 				});
 			});
