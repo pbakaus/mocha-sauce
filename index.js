@@ -68,7 +68,7 @@ MochaSauce.prototype.record = function(video, screenshots) {
 };
 
 MochaSauce.prototype.browser = function(conf) {
-	debug('add %s %s %s', conf.browserName, conf.version, conf.platform);
+	debug('add %s %s %s', conf.browserName || conf.app, conf.version, conf.platform);
 	conf.version = conf.version || '';
 	this.browsers.push(conf);
 };
@@ -93,7 +93,7 @@ MochaSauce.prototype.start = function(fn) {
 		batch.push(function(done) {
 
 			// initialize remote connection to Sauce Labs
-			debug('running %s %s %s', conf.browserName, conf.version, conf.platform);
+			debug('running %s %s %s', conf.browserName || conf.app, conf.version, conf.platform);
 			var browser = wd.remote(self.host, self.port, self.user, self.key);
 			self.emit('init', conf);
 

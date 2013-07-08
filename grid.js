@@ -71,7 +71,7 @@ function GridView(cloud, ctx) {
 
 GridView.prototype.maxWidth = function(){
 	return max(this.browsers, function(b){
-		return Math.max((b.browserName + ' ' + b.version).length, b.platform.length);
+		return Math.max(((b.browserName || b.app) + ' ' + b.version).length, b.platform.length);
 	});
 };
 
@@ -171,7 +171,7 @@ GridView.prototype.showFailures = function(){
 		if (!res.failures) return;
 		var failed = res.failed;
 		console.log();
-		console.log('   %s %s', browser.browserName, browser.version);
+		console.log('   %s %s', (browser.browserName || browser.app), browser.version);
 		console.log('   \033[90m%s\033[m', browser.platform);
 		failed.forEach(function(test){
 			var err = test.error;
@@ -205,7 +205,7 @@ GridView.prototype.draw = function(ctx){
 		if (x + max > w - 5) { y += 3; x = 4; }
 		var sym = self.symbolFor(browser);
 		var color = self.colorFor(browser);
-		var name = browser.browserName;
+		var name = browser.browserName || browser.app;
 		var version = browser.version;
 		var platform = browser.platform;
 		var label = name + ' ' + version;
@@ -226,5 +226,5 @@ GridView.prototype.draw = function(ctx){
  */
 
 function format(b) {
-	return b.browserName + ' ' + b.version + ' on ' + b.platform;
+	return (b.browserName || b.app) + ' ' + b.version + ' on ' + b.platform;
 }
