@@ -4,7 +4,7 @@
 
 ## Overview
 
-**Mocha Sauce is a node.js module that runs Mocha unit tests in the cloud using Sauce Connect or OnDemand**. Mocha Sauce is heavily inspired by [mocha-cloud](https://github.com/visionmedia/mocha-cloud) and uses a similar external API to be able to seemlessly connect to the pre-bundled and bugfixed version of [mocha-cloud-grid-view](https://github.com/visionmedia/mocha-cloud-grid-view).
+**Mocha Sauce is a node.js module that runs Mocha unit tests in the cloud using Sauce Connect or OnDemand**. Mocha Sauce was initially forked and heavily inspired by [mocha-cloud](https://github.com/visionmedia/mocha-cloud) and uses a similar external API to be able to seemlessly connect to the pre-bundled and bugfixed version of [mocha-cloud-grid-view](https://github.com/visionmedia/mocha-cloud-grid-view).
 
 ### Warning!
 
