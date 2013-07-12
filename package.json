@@ -5,7 +5,7 @@
 	"keywords": ["mocha", "test", "tdd", "bdd", "saucelabs", "selenium", "cloud", "testing"],
 	"author": "Paul Bakaus <pbakaus@zynga.com>",
 	"dependencies": {
-		"mocha": "1.9.0",
+		"mocha": "*",
 		"max-component": "*",
 		"sum-component": "*",
 		"term-canvas": "*",
