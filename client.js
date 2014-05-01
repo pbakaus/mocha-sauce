@@ -26,7 +26,7 @@ function FancyJSON(runner) {
 
 				result.durationSec += (suite.tests[i].duration / 1000) || 0;
 
-				if(suite.tests[i].state !== "passed")
+				if(suite.tests[i].state === "failed")
 					result.passed = false;
 
 			}
