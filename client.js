@@ -66,13 +66,17 @@ function FancyJSON(runner) {
 }
 
 
-function mochaSaucePlease(fn) {
+function mochaSaucePlease(options, fn) {
 
 	(function(runner) {
 
 		// execute optional callback to give user access to the runner
 		if(fn) {
 			fn(runner);
+		}
+
+		if(!options) {
+			options = {};
 		}
 
 		// in a PhantomJS environment, things are different
@@ -85,21 +89,24 @@ function mochaSaucePlease(fn) {
 		new mocha._reporter(runner);
 
 		// Generate XUnit coverage
-		window.xUnitReport = '';
-		(function() {
-			var log = window.console && console.log;
+		window.xUnitReport = 'off';
+		if(options.xunit != false) {
+			window.xUnitReport = '';
+			(function() {
+				var log = window.console && console.log;
 
-			if(!window.console) {
-				window.console = {};
-			}
+				if(!window.console) {
+					window.console = {};
+				}
 
-			console.log = function() {
-				window.xUnitReport += arguments[0] + "\n"; // TODO: handle complex console.log
-				if(log) log.apply(console, arguments);
-			};
-		})();
-		mocha.reporter("xunit");
-		new mocha._reporter(runner);
+				console.log = function() {
+					window.xUnitReport += arguments[0] + "\n"; // TODO: handle complex console.log
+					if(log) log.apply(console, arguments);
+				};
+			})();
+			mocha.reporter("xunit");
+			new mocha._reporter(runner);
+		}
 
 		// The Grid view needs more info about failures
 		var failed = [];
