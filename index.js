@@ -109,9 +109,11 @@ MochaSauce.prototype.start = function(fn) {
 					// wait until choco is ready
 					function doItAgain() {
 
+                                                console.log('is choco ready?' + ': ' + conf.browserName);
 						browser.eval('window.chocoReady', function(err, res) {
 
 							if(res !== true) {
+                                                                console.log('no....' + ': ' + conf.browserName);
 								setTimeout(function() {
 									doItAgain();
 								}, 1000);
@@ -120,7 +122,9 @@ MochaSauce.prototype.start = function(fn) {
 
 							if (err) return done(err);
 
-							browser.eval('JSON.stringify(window.mochaResults)', function(err, res) {
+                                                        console.log('yes....' + ': ' + conf.browserName);
+
+							browser.eval('JSON.stringify(window.testResults)', function(err, res) {
 								if (err) return done(err);
 
 								// convert stringified object back to parsed
@@ -133,7 +137,7 @@ MochaSauce.prototype.start = function(fn) {
 
 								// update Sauce Labs with custom test data
 								var data = {
-									'custom-data': { mocha: res.jsonReport },
+									'custom-data': { testReport: res.jsonReport },
 									'passed': !res.failures
 								};
 
