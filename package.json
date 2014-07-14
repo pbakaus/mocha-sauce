@@ -14,5 +14,9 @@
 		"debug": "*",
 		"batch": "*"
 	},
-	"main": "index"
+	"main": "index",
+        "repository" :
+          { "type" : "git",
+            "url" : "https://github.com/iamJoeTaylor/mocha-sauce.git"
+          }
 }
