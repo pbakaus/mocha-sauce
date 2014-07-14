@@ -104,7 +104,11 @@ MochaSauce.prototype.start = function(fn) {
 
 				// load the test site
 				browser.get(self._url, function(err) {
-					if (err) return done(err);
+                                        console.log('loading: ' + self._url + ', for: ' + conf.browserName);
+					if (err) {
+                                          console.log('error: ' + err);
+                                          return done(err);
+                                        }
 
 					// wait until choco is ready
 					function doItAgain() {
