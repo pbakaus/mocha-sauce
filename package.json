@@ -9,7 +9,7 @@
 		"max-component": "*",
 		"sum-component": "*",
 		"term-canvas": "*",
-		"wd": "git://github.com/iamJoeTaylor/wd.git",
+		"wd": "*",
 		"request": "*",
 		"debug": "*",
 		"batch": "*"
