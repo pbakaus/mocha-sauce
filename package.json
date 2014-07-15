@@ -9,10 +9,14 @@
 		"max-component": "*",
 		"sum-component": "*",
 		"term-canvas": "*",
-		"wd": "*",
+		"wd": "0.3.3",
 		"request": "*",
 		"debug": "*",
 		"batch": "*"
 	},
-	"main": "index"
+	"main": "index",
+        "repository" :
+          { "type" : "git",
+            "url" : "https://github.com/iamJoeTaylor/mocha-sauce.git"
+          }
 }

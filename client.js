@@ -126,7 +126,7 @@ function mochaSaucePlease(options, fn) {
 			runner.stats.failed = failed;
 			runner.stats.xUnitReport = xUnitReport;
 			runner.stats.jsonReport = jsonReport;
-			window.mochaResults = runner.stats;
+			window.testResults = runner.stats;
 			window.chocoReady = true;
 		});
 

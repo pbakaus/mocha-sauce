@@ -104,7 +104,10 @@ MochaSauce.prototype.start = function(fn) {
 
 				// load the test site
 				browser.get(self._url, function(err) {
-					if (err) return done(err);
+					if (err) {
+                                          console.log('error: ' + err);
+                                          return done(err);
+                                        }
 
 					// wait until choco is ready
 					function doItAgain() {
@@ -120,7 +123,7 @@ MochaSauce.prototype.start = function(fn) {
 
 							if (err) return done(err);
 
-							browser.eval('JSON.stringify(window.mochaResults)', function(err, res) {
+							browser.eval('JSON.stringify(window.testResults)', function(err, res) {
 								if (err) return done(err);
 
 								// convert stringified object back to parsed
@@ -133,7 +136,7 @@ MochaSauce.prototype.start = function(fn) {
 
 								// update Sauce Labs with custom test data
 								var data = {
-									'custom-data': { mocha: res.jsonReport },
+									'custom-data': { testReport: res.jsonReport },
 									'passed': !res.failures
 								};
 
