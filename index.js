@@ -104,7 +104,6 @@ MochaSauce.prototype.start = function(fn) {
 
 				// load the test site
 				browser.get(self._url, function(err) {
-                                        console.log('loading: ' + self._url + ', for: ' + conf.browserName);
 					if (err) {
                                           console.log('error: ' + err);
                                           return done(err);
@@ -113,11 +112,9 @@ MochaSauce.prototype.start = function(fn) {
 					// wait until choco is ready
 					function doItAgain() {
 
-                                                console.log('is choco ready?' + ': ' + conf.browserName);
 						browser.eval('window.chocoReady', function(err, res) {
 
 							if(res !== true) {
-                                                                console.log('no....' + ': ' + conf.browserName);
 								setTimeout(function() {
 									doItAgain();
 								}, 1000);
@@ -125,8 +122,6 @@ MochaSauce.prototype.start = function(fn) {
 							}
 
 							if (err) return done(err);
-
-                                                        console.log('yes....' + ': ' + conf.browserName);
 
 							browser.eval('JSON.stringify(window.testResults)', function(err, res) {
 								if (err) return done(err);
