@@ -104,7 +104,7 @@ function mochaSaucePlease(options, fn) {
 					if(log) log.apply(console, arguments);
 				};
 			})();
-			mocha.reporter("xunit");
+			mocha.reporter("xunit", {});
 			new mocha._reporter(runner);
 		}
 
