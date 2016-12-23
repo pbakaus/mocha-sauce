@@ -47,7 +47,7 @@ You can also put the git url into your package.json dependencies and any time yo
 
 ### 1. Set up your test page
 
-Follow the instructions at [Mocha's overview page](http://visionmedia.github.io/mocha/#browser-support) to make your tests run in the browser. When you got it all running, install mocha-sauce and alter your code slightly:
+Follow the instructions at [Mocha's overview page](http://mochajs.org/#running-mocha-in-the-browser) to make your tests run in the browser. When you got it all running, install mocha-sauce and alter your code slightly:
 
 1. Include the client.js file from wherever mocha-sauce is installed:
    
