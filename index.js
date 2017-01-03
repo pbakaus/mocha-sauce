@@ -133,7 +133,7 @@ MochaSauce.prototype.start = function(fn) {
 
 								// update Sauce Labs with custom test data
 								var data = {
-									'custom-data': { mocha: res.jsonReport },
+									//'custom-data': { mocha: res.jsonReport },
 									'passed': !res.failures
 								};
 
@@ -142,7 +142,7 @@ MochaSauce.prototype.start = function(fn) {
 									uri: ["https://", self.user, ":", self.key, "@saucelabs.com/rest", "/v1/", self.user, "/jobs/", browser.sessionID].join(''),
 									headers: {'Content-Type': 'application/json'},
 									body: JSON.stringify(data)
-								}, function (/*error, response, body*/) {
+								}, function (error, response, body) {
 
 									self.emit('end', conf, res);
 									browser.quit();
